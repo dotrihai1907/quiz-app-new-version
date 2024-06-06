@@ -1,18 +1,15 @@
-export type ProgressBarProps = {
-  numQues: number;
-  curQuestion: number;
-  points: number;
-  maxPoints: number;
-  answer: number | null;
-};
+import { useQuiz } from "../contexts/QuizContext";
 
-const ProgressBar = (props: ProgressBarProps) => {
-  const { numQues, curQuestion, points, maxPoints, answer } = props;
+const ProgressBar = () => {
+  const { questions, curQuestion, points, maxPoints, answer } = useQuiz();
   return (
     <header className="progress">
-      <progress max={numQues} value={curQuestion + Number(answer !== null)} />
+      <progress
+        max={questions.length}
+        value={curQuestion + Number(answer !== null)}
+      />
       <p>
-        Question <strong>{curQuestion + 1}</strong> / {numQues}
+        Question <strong>{curQuestion + 1}</strong> / {questions.length}
       </p>
 
       <p>

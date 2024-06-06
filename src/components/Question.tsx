@@ -1,22 +1,10 @@
-import { ACTION_TYPE } from "./constant";
-import { ActionType, QuestionType } from "./model";
+import { useQuiz } from "../contexts/QuizContext";
 
-export type QuestionProps = {
-  question: QuestionType;
-  answer: number | null;
-  dispatch: React.Dispatch<ActionType>;
-};
-
-const { ANSWER } = ACTION_TYPE;
-
-const Question = (props: QuestionProps) => {
-  const { question, answer, dispatch } = props;
+const Question = () => {
+  const { questions, curQuestion, answer, handleAnswer } = useQuiz();
 
   const isAnswered = answer !== null;
-
-  const handleAnswer = (answer: number) => {
-    dispatch({ type: ANSWER, payload: answer });
-  };
+  const question = questions[curQuestion];
 
   return (
     <div>

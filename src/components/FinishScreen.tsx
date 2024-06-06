@@ -1,17 +1,7 @@
-import { ACTION_TYPE } from "./constant";
-import { ActionType } from "./model";
+import { useQuiz } from "../contexts/QuizContext";
 
-export type FinishScreenProps = {
-  points: number;
-  maxPoints: number;
-  highscore: number;
-  dispatch: React.Dispatch<ActionType>;
-};
-
-const { RESTART } = ACTION_TYPE;
-
-const FinishScreen = (props: FinishScreenProps) => {
-  const { points, maxPoints, highscore, dispatch } = props;
+const FinishScreen = () => {
+  const { points, maxPoints, highscore, handleRestart } = useQuiz();
 
   const percentage = Math.ceil((points / maxPoints) * 100);
 
@@ -22,10 +12,6 @@ const FinishScreen = (props: FinishScreenProps) => {
   if (percentage >= 50 && percentage < 80) emoji = "😃";
   if (percentage >= 0 && percentage < 50) emoji = "😳";
   if (percentage === 0) emoji = "🤦";
-
-  const handleRestart = () => {
-    dispatch({ type: RESTART });
-  };
 
   return (
     <>

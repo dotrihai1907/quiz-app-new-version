@@ -1,26 +1,16 @@
-import { ACTION_TYPE } from "./constant";
-import { ActionType } from "./model";
+import { useQuiz } from "../contexts/QuizContext";
 
-export type NextButtonProps = {
-  numQues: number;
-  curQuestion: number;
-  dispatch: React.Dispatch<ActionType>;
-};
+const NextButton = () => {
+  const { curQuestion, questions, handleNextQuestion, handleFinish } =
+    useQuiz();
 
-const { NEXT_QUESTION, FINISH } = ACTION_TYPE;
-
-const NextButton = (props: NextButtonProps) => {
-  const { curQuestion, numQues, dispatch } = props;
-
-  const handleNextQuestion = () => {
-    curQuestion < numQues - 1
-      ? dispatch({ type: NEXT_QUESTION })
-      : dispatch({ type: FINISH });
+  const handleClick = () => {
+    curQuestion < questions.length - 1 ? handleNextQuestion() : handleFinish();
   };
 
   return (
-    <button className="btn btn-ui" onClick={handleNextQuestion}>
-      {curQuestion < numQues - 1 ? "Next" : "Finish"}
+    <button className="btn btn-ui" onClick={handleClick}>
+      {curQuestion < questions.length - 1 ? "Next" : "Finish"}
     </button>
   );
 };

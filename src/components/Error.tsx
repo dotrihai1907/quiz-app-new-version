@@ -1,7 +1,7 @@
 const Error = () => {
   return (
     <p className="error">
-      <span>💥</span> There was an error fetchinng questions.
+      <span>💥</span> There was an error fetching questions.
     </p>
   );
 };
